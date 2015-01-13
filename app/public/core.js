@@ -12,8 +12,8 @@
       .when( '/songs', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
       .when( '/songs/:page', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
       .when( '/song/:songId',{ controller: 'songDetail', templateUrl: 'view/song.html', title: "Songs Detail" } )
-      .when( '/',{})
-      .otherwise( { redirectTo: '/' } );
+      .when( '/home',{ controller: 'homeCtrl', templateUrl: 'view/home.html', title: 'Home'})
+      .otherwise( { redirectTo: '/home' } );
   });
   dsong.run(function ($rootScope) {});
   dsong.controller('songDetail', ['$scope', '$http', '$routeParams',
@@ -40,8 +40,6 @@
           $scope.ptotal = data.pageTotal;
           $scope.pnext = (data.pageTotal === page ? -1 : parseInt(page)+1);
           $scope.pprev = (page<2 ? -1 : page-1);
-          console.log($scope.pprev);
-          console.log($scope.pnext);
           $scope.dataExist = function(attr){
             if(attr == null || attr == "" || attr == "undefined") return false;
             return attr.length;

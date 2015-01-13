@@ -62,7 +62,14 @@ router
         res.json(song);
       });
     });
-
+router  
+  .route('/artists/random/:number')
+    .get(function(req,res){
+      Artist.findRandom({}, {}, {limit: req.params.number}, function(err, data) {
+        if (err) console.log(err);
+        res.json(data);
+      });
+    });
 router  
   .route('/artists/:limit/:page')
     .get(function(req, res) {
@@ -128,6 +135,14 @@ router
       });
     });
   /* /songs */
+router
+  .route('/songs/random/:number')
+    .get(function(req,res){
+      Song.findRandom({}, {}, {limit: req.params.number}, function(err, data) {
+        if (err) console.log(err);
+        res.json(data);
+      });
+    });
 router  
   .route('/songs/:limit/:page')
     .get(function(req, res) {

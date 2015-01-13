@@ -1,5 +1,6 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
+var random       = require('mongoose-simple-random');
 
 var SongSchema   = new Schema({
     id: Number,
@@ -18,5 +19,6 @@ var SongSchema   = new Schema({
     videoplayer: String,
     spotify: String
 },{ collection : 'songs' });
+SongSchema.plugin(random);
 
 module.exports = mongoose.model('Song', SongSchema);
