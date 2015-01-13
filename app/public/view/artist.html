@@ -1,12 +1,12 @@
 <div class="header-content" ng-controller="artistDetailCtrl">
   <div class="sublayer img"></div>
-  <div id="container" class="databoxes">
+  <div ng-if="artist" id="container" class="databoxes">
     <div class="databox">
       <div class="databox-header">
         <h2 class="title"><a href="/artist/{{artist.name}}">{{artist.name}}</a></h2>
       </div>
       <div class="databox-body">
-        <p ng-if="dataExist(artist.country)"> from <a href="/artists/country/{{artist.country}}">{{artist[0].country}}</a></p>
+        <p ng-if="dataExist(artist.country)"> from <a href="/artists/country/{{artist.country}}">{{artist.country}}</a></p>
       </div>
     </div>
   </div>

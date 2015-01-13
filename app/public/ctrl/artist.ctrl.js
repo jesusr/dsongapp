@@ -12,6 +12,6 @@ dsong.controller('artistDetailCtrl', ['$scope', '$http', '$routeParams',
         });
       $http.get('/api/artist/'+id)
         .success(function(data) {
-          $scope.artist = data;
+          data.length ? $scope.artist = data[0] : $scope.artist = false; 
         });
     }]);
