@@ -1,0 +1,205 @@
+@import url(http://fonts.googleapis.com/css?family=Rokkitt:400,700)
+@import compass
+$rk: Rokkitt
+body
+  height: 100%
+  overflow: hidden
+.layer
+  box-sizing: border-box
+  width: 100%
+  height: 100%
+  .sublayer
+    width: 100%
+    height: 100%
+    z-index: -1
+    position: absolute
+    top: 0
+    left: 0
+    &.img
+      // background-image: url(../img/main1.jpg)
+      // background-size: cover
+  .header-content
+    +clearfix
+    box-sizing: border-box
+    background-color: #fff
+    width: 100%
+    top: 0
+    padding-top: 100px
+    position: absolute
+    height: 100%
+    z-index: -1
+    overflow-x: hidden
+    overflow-y: scroll
+  &.layer1
+    z-index: 99
+    position: absolute
+  &.layer2
+    z-index: 98
+.databoxes
+  max-width: 960px
+  margin: 0 auto
+  box-sizing: border-box
+  position: relative
+.databox
+  background-color: #653016
+  min-width: 300px 
+  width: 30%
+  margin-right: 3%
+  margin-top: 30px
+  display: inline-block
+  font-family: Helvetica
+  &:nth-child(3n+0)
+    margin-right: 0
+  &:nth-child(n+3)
+  .databox-header
+    display: table
+    line-height: 1.2em
+    color: #f3f3f3
+    width: 100%
+    text-transform: uppercase
+    +box-sizing(border-box)
+    padding: 0px 10px 0 10px
+    background-color: #482615
+    min-height: 80px
+    h2 
+      display: table-cell
+      vertical-align: middle
+      font-size: 1em
+      padding: .5em .2em
+
+    a
+      line-height: 1.3em
+      text-decoration: none
+      color: #f3f3f3
+      text-transform: uppercase
+  .databox-body
+    padding: 20px 10px
+    line-height: 1.5em
+    color: #ddd
+  .databox-footer
+    background-color: #482615
+    padding: 10px
+    a
+      display: inline-block
+      border-radius: 5px
+      padding: 3px 8px
+      color: white
+      text-decoration: none
+      background-color: lightblue
+
+
+header
+  max-width: 960px
+  margin: 0 auto
+  padding: 0
+  +transition(padding .3s ease-in-out)
+  &.activated
+    background-color: white
+    padding-top: 50px
+    +transition(padding .3s ease-in-out .5s)
+    nav
+      &>ul
+        &>li.active
+          +transition(background-color .3s ease-in-out 0)
+          background-color: #333
+          +transition(width .3s ease-in-out)
+          padding-left: 0
+          padding-right: 0
+          width: 300px
+          &>a
+            +transition(all .5s ease-in-out .2s)
+            letter-spacing: 11px
+          &>ul
+            border-bottom: 1px solid #444
+            display: block
+            visibility: visible
+            +transition(visibility 0s ease-in-out 0)          
+h1
+  +transition(all .5s ease-in-out .2s)
+  font-family: Helvetica, Arial
+  display: inline-block
+  float: left
+  background-color: black
+  color: white
+  margin: 0
+  letter-spacing: 5px
+  font-weight: lighter
+  font-size: 25px
+  line-height: 25px
+  padding: 12.5px
+  cursor: pointer
+  &:hover
+    +transform(rotate(2deg))
+    font-size: 20px
+    padding: 12.5px 12.5px 0
+    letter-spacing: 0
+    color: green
+    +transition(all .5s ease-in-out .2s)
+    
+nav
+  height: 50px
+  &>ul
+    +horizontal-list-container
+    background-color: black
+    height: 50px
+    overflow: visible
+    &>li
+      font-family: Helvetica, Arial, sans-serif
+      background-color: black
+      +transition(background-color .3s ease-in-out .8s)
+      +horizontal-list-item
+      +transition(top .3s ease-in-out)
+      +transition(width .3s ease-in-out .3s)
+      text-align: left
+      position: relative
+      width: 120px
+      cursor: pointer
+      text-transform: uppercase
+      &>a
+        letter-spacing: normal
+        +transition(all .5s ease-in-out .2s)
+        padding: 1em
+        display: block
+        color: white
+        text-decoration: none
+        float: left
+        &:hover
+          color: gray
+      &>ul
+        +horizontal-list-container
+        position: absolute
+        left: 0
+        top: -50px
+        background-color: #333
+        height: 50px
+        width: 300px
+        display: block
+        visibility: hidden
+        +transition(visibility 0s ease-in-out .8s)
+        &>li
+          +horizontal-list-item
+          text-align: center
+          &>a
+            text-transform: none
+            font-family: $rk
+            font-weight: 900
+            padding: 1.1em
+            display: block
+            color: #ccc
+            text-decoration: none
+            font-size: .9em
+            &:link,&:visited
+              color: #ccc
+            &:hover
+              color: gray
+        span
+          text-transform: none
+          font-family: Helvetica, Arial, sans-serif
+          display: inline-block
+          font-weight: lighter
+          float: left
+          padding: 1.5em
+          border-right: 1px solid #444
+          color: #666
+          font-size: .7em
+           

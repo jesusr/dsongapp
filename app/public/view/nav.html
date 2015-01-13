@@ -1,0 +1,14 @@
+<h1>dSong App</h1>
+<nav>
+  <ul>
+    <li ng-repeat="item in menu" ng-class="navClass('{{item.route}}')">
+      <a href="{{item.route}}">{{item.name}}</a>
+      <ul ng-if="item.subitems">
+        <span>Choose</span>
+        <li ng-repeat="subitem in item.subitems">
+          <a href="{{subitem.funcion}}">{{subitem.name}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

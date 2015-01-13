@@ -1,0 +1,29 @@
+<div class="header-content" ng-controller="songsList">
+  <div class="databoxes">
+    <div class="databox">
+      <div class="databox-header">
+        <h2 class="title"><a href="/song/{{song._id}}">{{song.title}}</a></h2>
+      </div>
+      <div class="databox-body">
+        <p ng-if="dataExist(song.artist)"><span>Artista:</span> <a href="/artist/{{song.artist}}">{{song.artist}}</a></p>
+        <p ng-if="dataExist(song.album)"><span>Album:</span> <a href="/album/{{song.album}}"></a>{{song.album}}</p>
+        <p ng-if="dataExist(song.year)"><span>Año:</span> <a href="/year/{{song.year}}">{{song.year}}</a></p>
+        <p ng-if="dataExist(song.genre)"><span>Géneros:</span> {{song.genre}}</p>
+        <p ng-if="dataExist(song.country)"><a href="/country/{{song.country}}">{{song.country}}</a></p>
+      </div>
+      <div ng-if="dataExist(song.web) || dataExist(song.spotify)" class="databox-footer">
+        <div class="data-icons">
+          <a ng-if="dataExist(song.web)" href="{{dataWebComplete(song.web)}}">Web Oficial</a>
+          <a ng-if="dataExist(song.spotify)" href="{{song.spotify}}">Link Spotify</a>
+        </div>
+      </div>
+    </div>
+    <object ng-if="dataExist(song.audioplayer)" width="250" height="40">
+      <param name="movie" value="http://grooveshark.com/songWidget.swf">
+      <param name="wmode" value="window">
+      <param name="allowScriptAccess" value="always">
+      <param name="flashvars" value="hostname=cowbell.grooveshark.com&amp;songIDs={{songAudioplayer}}&amp;style=metal&amp;p=0">
+      <embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&amp;songIDs={{songAudioplayer}}&amp;style=metal&amp;p=0" allowscriptaccess="always" wmode="window">
+    </object>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="header-content" ng-controller="artistDetailCtrl">
+  <div class="sublayer img"></div>
+  <div id="container" class="databoxes">
+    <div class="databox">
+      <div class="databox-header">
+        <h2 class="title"><a href="/artist/{{artist.name}}">{{artist.name}}</a></h2>
+      </div>
+      <div class="databox-body">
+        <p ng-if="dataExist(artist.country)"> from <a href="/artists/country/{{artist.country}}">{{artist[0].country}}</a></p>
+      </div>
+    </div>
+  </div>
+  <div id="container" class="databoxes">
+    <div class="databox" ng-repeat="item in songs">
+      <div class="databox-header">
+        <h2 class="title"><a href="/song/{{item._id}}">{{item.title}}</a></h2>
+      </div>
+      <div class="databox-body">
+        <p ng-if="dataExist(item.artist)"><span>Artista:</span> <a href="/artist/{{item.artist}}">{{item.artist}}</a></p>
+        <p ng-if="dataExist(item.album)"><span>Album:</span> <a href="/album/{{item.album}}"></a>{{item.album}}</p>
+        <p ng-if="dataExist(item.year)"><span>Año:</span> <a href="/year/{{item.year}}">{{item.year}}</a></p>
+        <p ng-if="dataExist(item.genre)"><span>Géneros:</span> {{item.genre}}</p>
+        <p ng-if="dataExist(item.country)"><a href="/country/{{item.country}}">{{item.country}}</a></p>
+      </div>
+      <div ng-if="dataExist(item.web) || dataExist(item.spotify)" class="databox-footer">
+        <div class="data-icons">
+          <a ng-if="dataExist(item.web)" href="{{item.web}}">Web Oficial</a>
+          <a ng-if="dataExist(item.spotify)" href="{{item.spotify}}">Link Spotify</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

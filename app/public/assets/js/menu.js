@@ -1,0 +1,26 @@
+$=jQuery;
+$(function(){
+  $('.databoxes').height(window.height()-100+'px');
+  openSub=function(el){
+    el.addClass('active');
+    $('header').addClass('activated');
+  };
+  closeSub=function(el){
+    $('nav>ul>li.active').removeClass('active');
+    $('header').removeClass('activated');
+  };
+  $('nav>ul>li').click(function(e){
+    elem=$(this);
+    if($('header').hasClass('activated')){
+      if($('nav>ul>li.active').not(elem).length>0){
+        closeSub();
+        setTimeout(function(){openSub(elem);}, 500);
+      }else{
+        closeSub();
+      }
+    }
+    else{
+      openSub($(this));
+    }
+  });
+});
