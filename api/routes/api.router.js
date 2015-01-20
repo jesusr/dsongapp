@@ -66,7 +66,7 @@ router
   .route('/artists/random/:number')
     .get(function(req,res){
       Artist.findRandom({}, {}, {limit: req.params.number}, function(err, data) {
-        if (err) console.log(err);
+        if (err) res.send(err);
         res.json(data);
       });
     });
@@ -139,7 +139,6 @@ router
   .route('/songs/random/:number')
     .get(function(req,res){
       Song.findRandom({}, {}, {limit: req.params.number}, function(err, data) {
-        if (err) console.log(err);
         res.json(data);
       });
     });

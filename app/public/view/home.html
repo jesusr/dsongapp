@@ -1,3 +1,16 @@
-<div class="" ng-controller="homeCtrl">
-  
+<div class="header-content home" ng-controller="homeCtrl">
+  <div class="databoxes">
+    <div class="artists">
+      <div class="artist" ng-repeat="item in artists track by item._id">
+        <img src="{{img[$index].items[0].media.m}}" alt="">
+        <a href="/artist/{{item.name}}">{{item.name}}</a>
+      </div>
+    </div>
+    <div class="songs">
+      <div class="song" ng-repeat="item in songs track by item._id">
+        <img src="{{img_songs[$index]}}" alt="">
+        <a href="/song/{{item._id}}">{{item.title}}</a>
+      </div>
+    </div>
+  </div>
 </div>

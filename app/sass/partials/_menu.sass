@@ -202,4 +202,35 @@ nav
           border-right: 1px solid #444
           color: #666
           font-size: .7em
-           
+.home.home
+  padding-top: 50px
+  .databoxes
+    .artists
+      position: relative
+      top: -1px
+    .artist
+      display: inline-block
+      width: 27.5%
+      position: relative
+      +box-sizing(border-box)
+      vertical-align: top
+      float: right
+      &:first-child
+        width: 45%
+        float: left
+      &:last-child
+        border-right: 0
+        width: 55%
+      img
+        width: 100%
+      a
+        font-family: Helvetica
+        font-size: 1.1em
+        position: absolute
+        bottom: 1em
+        color: white
+        text-decoration: none
+        text-transform: uppercase
+        text-align: right
+        right: 1em
+    .songs
