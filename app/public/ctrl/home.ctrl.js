@@ -7,10 +7,11 @@
           $scope.artists = data;
           $scope.img = [];
           for (e in data){
-            console.log(data[e]);
-            $scope.img.push(flickrPhotos.load({ tags: data[e].name +' , live', tag_mode : 'all' , content_type: 1}));   
+            flickrPhotos.load({ tags: data[e].name +' , live', tag_mode : 'all' , content_type: 1, per_page: 1},function(data){
+              if(!data.items.length) $scope.img.push('/assets/res/img/dummy.png');
+              else $scope.img.push(data.items[0].media.m);
+            });   
           }
-          console.log($scope.img);
         });
       $http.get('/api/songs/random/10')
         .success(function(data){

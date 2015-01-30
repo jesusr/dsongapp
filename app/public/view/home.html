@@ -1,9 +1,9 @@
 <div class="header-content home" ng-controller="homeCtrl">
   <div class="databoxes">
     <div class="artists">
-      <div class="artist" ng-repeat="item in artists track by item._id">
-        <img src="{{img[$index].items[0].media.m}}" alt="">
-        <a href="/artist/{{item.name}}">{{item.name}}</a>
+      <div class="artist" style="background-image:url('{{img[$index]}}');" ng-repeat="item in artists track by item._id">
+        <a class="link" href="/artist/{{item.name}}"></a>
+        <h2 href="">{{item.name}}</h2>
       </div>
     </div>
     <div class="songs">

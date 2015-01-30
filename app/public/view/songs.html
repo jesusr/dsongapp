@@ -6,24 +6,24 @@
         <h2 class="title"><a href="/song/{{item._id}}">{{item.title}}</a></h2>
       </div>
       <div class="databox-body">
-        <p ng-if="dataExist(item.artist)"><span>Artista:</span> <a href="/artist/{{item.artist}}">{{item.artist}}</a></p>
-        <p ng-if="dataExist(item.album)"><span>Album:</span> <a href="/album/{{item.album}}"></a>{{item.album}}</p>
-        <p ng-if="dataExist(item.year)"><span>Año:</span> <a href="/year/{{item.year}}">{{item.year}}</a></p>
-        <p ng-if="dataExist(item.genre)"><span>Géneros:</span> {{item.genre}}</p>
-        <p ng-if="dataExist(item.country)"><a href="/country/{{item.country}}">{{item.country}}</a></p>
+        <p ng-if="dataExist(item.artist)"><i class="fa fa-user"></i> <span>Artista:</span> <a href="/artist/{{item.artist}}">{{item.artist}}</a></p>
+        <p ng-if="dataExist(item.album)"><i class="fa fa-dot-circle-o"></i> <span>Album:</span> <a href="/album/{{item.album}}"></a>{{item.album}}</p>
+        <p ng-if="dataExist(item.year)"><i class="fa fa-calendar"></i> <span>Año:</span> <a href="/year/{{item.year}}">{{item.year}}</a></p>
+        <p ng-if="dataExist(item.genre)"><i class="fa fa-music"></i> <span>Géneros:</span> {{item.genre}}</p>
+        <p ng-if="dataExist(item.country)"><i class="fa fa-flag"></i> <a href="/country/{{item.country}}">{{item.country}}</a></p>
       </div>
-      <div ng-if="dataExist(item.web) || dataExist(item.spotify)" class="databox-footer">
+      <div class="databox-footer">
         <div class="data-icons">
-          <a ng-if="dataExist(item.web)" href="{{item.web}}">Web Oficial</a>
-          <a ng-if="dataExist(item.spotify)" href="{{item.spotify}}">Link Spotify</a>
+          <a ng-if="dataExist(item.spotify)" title="Link Spotify" href="{{item.spotify}}"><i class="fa fa-spotify"></i></a>
+          <a ng-if="dataExist(item.web)" title="Web Oficial" href="{{item.web}}"><i class="fa fa-external-link"></i></a>
         </div>
       </div>
     </div>
     <div class="pag">
       <p>
-        <a ng-if="pprev!=-1" href="/songs/{{pprev}}"><span>Página anterior</span> ({{pprev}}) </a>
-        {{page}}
-        <a ng-if="pnext!=-1" href="/songs/{{pnext}}"> ({{pnext}}) <span> Página siguiente </span></a>
+        <a ng-show="pprev!=-1" href="{{pprev}}"><span>Página anterior</span> <i class="fa fa-arrow-circle-o-left"></i> </a>
+        <span>{{page}}</span>
+        <a ng-show="pnext!=-1" href="{{pnext}}"> <i class="fa fa-arrow-circle-o-right"></i> <span> Página siguiente </span></a>
       </p>
     </div>
   </div>

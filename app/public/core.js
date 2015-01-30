@@ -18,15 +18,16 @@
       .when( '/artist/:artistId', { controller: 'artistDetailCtrl', templateUrl: 'view/artist.html', title: "Artist Detail" } )   
       .when( '/songs', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
       .when( '/songs/:page', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
+      .when( '/songs/:page/orderby/:crit', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
+      .when( '/songs/:page/orderby/:crit/:desc', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
       .when( '/song/:songId',{ controller: 'songDetail', templateUrl: 'view/song.html', title: "Songs Detail" } )
       .when( '/home',{ templateUrl: 'view/home.html', title: 'Home'})
       .otherwise( { redirectTo: '/home' } );
   });
-  dsong.run(function ($rootScope) {});
+  dsong.run(function ($rootScope) { $rootScope.loading = 0; });
   dsong.factory('flickrPhotos', function ($resource) {
     return $resource('http://api.flickr.com/services/feeds/photos_public.gne', { format: 'json', jsoncallback: 'JSON_CALLBACK' }, { 'load': { 'method': 'JSONP' } });
   });
-
   dsong.controller('songDetail', ['$scope', '$http', '$routeParams','flickrPhotos',
     function ($scope, $http, $routeParams, flickrPhotos) {
       var id = $routeParams.songId;
@@ -43,19 +44,22 @@
     }]);
   dsong.controller('songsList', ['$scope', '$http', '$routeParams','$rootScope', 'flickrPhotos',
     function ($scope, $http, $routeParams, $rootScope, flickrPhotos) {
-      if ($routeParams.page) page=$routeParams.page;
-      else page=1;
-      $http.get('/api/songs/15/'+page)
+      $rootScope.loading = 1;
+      if ($routeParams.page) var page = $routeParams.page;
+      else var page=1;
+      if ($routeParams.crit) var crit = 'orderby/artist/1'; else crit = "";
+      $http.get('/api/songs/15/'+page+'/'+crit)
         .success(function(data) {
           $scope.songs = data.data;
           $scope.page = data.page;
           $scope.ptotal = data.pageTotal;
-          $scope.pnext = (data.pageTotal === page ? -1 : parseInt(page)+1);
-          $scope.pprev = (page<2 ? -1 : page-1);
+          $scope.pnext = (data.pageTotal === page ? -1 : '/songs/'+(parseInt(page)+1)+'/'+crit);
+          $scope.pprev = (page<2 ? -1 : '/songs/'+(parseInt(page)-1)+crit);
           $scope.dataExist = function(attr){
             if(attr == null || attr == "" || attr == "undefined") return false;
             return attr.length;
           };
         });
+      $rootScope.loading = 0;
     }]);
 }());

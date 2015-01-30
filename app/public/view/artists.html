@@ -11,9 +11,9 @@
     </div>
     <div class="pag">
       <p>
-        <a ng-if="pprev!=-1" href="/artists/{{pprev}}"><span>Página anterior</span> ({{pprev}}) </a>
-        {{page}}
-        <a ng-if="pnext!=-1" href="/artists/{{pnext}}"> ({{pnext}}) <span> Página siguiente </span></a>
+        <a ng-show="pprev!=-1" href="/songs/{{pprev}}"><span>Página anterior</span> <i class="fa fa-arrow-circle-o-left"></i> </a>
+        <span>{{page}}</span>
+        <a ng-show="pnext!=-1" href="/songs/{{pnext}}"> <i class="fa fa-arrow-circle-o-right"></i> <span> Página siguiente </span></a>
       </p>
     </div>
   </div>

@@ -7,8 +7,8 @@
         'route': '/artists',
         'subitems': [
           {
-            'name': 'Filtro 1',
-            'funcion': 'filter1'
+            'name': '',
+            'funcion': ''
           },
           {
             'name': 'Filtro 2',
@@ -25,8 +25,8 @@
         'route': '/songs',
         'subitems': [
           {
-            'name': 'Filtro 1',
-            'funcion': 'filter1'
+            'name': 'Artista',
+            'funcion': '/songs/1/orderby/artist'
           },
           {
             'name': 'Filtro 2',
