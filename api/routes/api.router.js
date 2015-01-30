@@ -143,6 +143,25 @@ router
       });
     });
 router  
+  .route('/songs/:limit/:page/orderby/artist/:asc_desc')
+    .get(function(req, res) {
+      var limit = req.params.limit;
+      var page = req.params.page;
+      var asc_desc =  req.params.asc_desc;
+      Song.find({},null, {sort: { 'artist' : 1 }},function(err,data){
+        limit = limit ? limit : data.length;
+        var begin = parseInt(limit) * (parseInt(page) - 1);
+        var numPages = Math.floor(data.length / parseInt(limit)) + ((data.length / parseInt(limit)) > Math.floor(data.length / parseInt(limit)) ? 1 : 0);
+        var pageInfo = page + "/" + numPages;
+        if (parseInt(page) > numPages || parseInt(page) == 0) {
+          res.json({"result": "error", "data": {"error": "Page doesn't exist"}});
+        }
+        else {
+          res.json({"data": data.slice(begin, begin + parseInt(limit)), "page": page, "pageTotal": numPages, "pageInfo": pageInfo});
+        }
+      });
+    });
+router  
   .route('/songs/:limit/:page')
     .get(function(req, res) {
       var limit = req.params.limit;
