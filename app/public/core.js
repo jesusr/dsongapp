@@ -1,65 +1,107 @@
-(function(){
-  dsong = angular.module('dsong', ['ng','ngRoute','ngResource']);
-  dsong.config(['$locationProvider', function($locationProvider){
-      $locationProvider.html5Mode({enabled: true, requireBase: false });
-      $locationProvider.html5Mode(true).hashPrefix('!');
-  }]);
-  dsong.config(['$httpProvider',function($httpProvider){
-    $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = true;
-    delete $httpProvider.defaults.headers.common["X-Requested-With"];
-    $httpProvider.defaults.headers.common["Accept"] = "application/json";
-    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-  }]);
-  dsong.config(function($routeProvider){
-    $routeProvider
-      .when( '/artists', { controller: 'artistsListCtrl', templateUrl: 'view/artists.html', title: "Artists List" } )   
-      .when( '/artists/:page', { controller: 'artistsListCtrl', templateUrl: 'view/artists.html', title: "Artists List" } )   
-      .when( '/artist/:artistId', { controller: 'artistDetailCtrl', templateUrl: 'view/artist.html', title: "Artist Detail" } )   
-      .when( '/songs', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
-      .when( '/songs/:page', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
-      .when( '/songs/:page/orderby/:crit', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
-      .when( '/songs/:page/orderby/:crit/:desc', { controller: 'songsList', templateUrl: 'view/songs.html', title: "Songs List" } )
-      .when( '/song/:songId',{ controller: 'songDetail', templateUrl: 'view/song.html', title: "Songs Detail" } )
-      .when( '/home',{ templateUrl: 'view/home.html', title: 'Home'})
-      .otherwise( { redirectTo: '/home' } );
-  });
-  dsong.run(function ($rootScope) { $rootScope.loading = 0; });
-  dsong.factory('flickrPhotos', function ($resource) {
-    return $resource('http://api.flickr.com/services/feeds/photos_public.gne', { format: 'json', jsoncallback: 'JSON_CALLBACK' }, { 'load': { 'method': 'JSONP' } });
-  });
-  dsong.controller('songDetail', ['$scope', '$http', '$routeParams','flickrPhotos',
-    function ($scope, $http, $routeParams, flickrPhotos) {
-      var id = $routeParams.songId;
-      $http.get('/api/song/'+id)
-        .success(function(data) {
-          $scope.song = data;
-          $scope.img = assets.getImage();
-          $scope.songAudioplayer = data.audioplayer.split('/').splice(-1)[0].replace(/\s+/g, '');
-          $scope.dataExist = function(attr){
-            if(attr == null || attr == "") return false;
-            return attr.length;
-          };
+(function() {
+    'use strict';
+    var dsong;
+    dsong = angular.module('dsong', ['ng', 'ngRoute', 'ngResource']);
+    dsong.config(['$locationProvider', function($locationProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
         });
+        $locationProvider.html5Mode(true).hashPrefix('!');
     }]);
-  dsong.controller('songsList', ['$scope', '$http', '$routeParams','$rootScope', 'flickrPhotos',
-    function ($scope, $http, $routeParams, $rootScope, flickrPhotos) {
-      $rootScope.loading = 1;
-      if ($routeParams.page) var page = $routeParams.page;
-      else var page=1;
-      if ($routeParams.crit) var crit = 'orderby/artist/1'; else crit = "";
-      $http.get('/api/songs/15/'+page+'/'+crit)
-        .success(function(data) {
-          $scope.songs = data.data;
-          $scope.page = data.page;
-          $scope.ptotal = data.pageTotal;
-          $scope.pnext = (data.pageTotal === page ? -1 : '/songs/'+(parseInt(page)+1)+'/'+crit);
-          $scope.pprev = (page<2 ? -1 : '/songs/'+(parseInt(page)-1)+crit);
-          $scope.dataExist = function(attr){
-            if(attr == null || attr == "" || attr == "undefined") return false;
-            return attr.length;
-          };
+    dsong.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.withCredentials = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        $httpProvider.defaults.headers.common.Accept = 'application/json';
+        $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+    }]);
+    dsong.config(function($routeProvider) {
+        $routeProvider
+            .when('/artists', {
+                controller: 'artistsListCtrl',
+                templateUrl: 'view/artists.html',
+                title: 'Artists List'
+            })
+            .when('/artists/:page', {
+                controller: 'artistsListCtrl',
+                templateUrl: 'view/artists.html',
+                title: 'Artists List'
+            })
+            .when('/artist/:artistId', {
+                controller: 'artistDetailCtrl',
+                templateUrl: 'view/artist.html',
+                title: 'Artist Detail'
+            })
+            .when('/songs', {
+                controller: 'songsList',
+                templateUrl: 'view/songs.html',
+                title: 'Songs List'
+            })
+            .when('/songs/:page', {
+                controller: 'songsList',
+                templateUrl: 'view/songs.html',
+                title: 'Songs List'
+            })
+            .when('/songs/:page/orderby/:crit', {
+                controller: 'songsList',
+                templateUrl: 'view/songs.html',
+                title: 'Songs List'
+            })
+            .when('/songs/:page/orderby/:crit/:desc', {
+                controller: 'songsList',
+                templateUrl: 'view/songs.html',
+                title: 'Songs List'
+            })
+            .when('/song/:songId', {
+                controller: 'songDetail',
+                templateUrl: 'view/song.html',
+                title: 'Songs Detail'
+            })
+            .when('/song/:songId/:method', {
+                controller: 'songDetail',
+                templateUrl: 'view/song.html',
+                title: 'Songs Detail'
+            })
+            .when('/home', {
+                templateUrl: 'view/home.html',
+                title: 'Home'
+            })
+            .otherwise({
+                redirectTo: '/home'
+            });
+    });
+    dsong.run(function($rootScope) {
+        $rootScope.loading = 0;
+    });
+    dsong.factory('flickrPhotos', function($resource) {
+        return $resource('http://api.flickr.com/services/feeds/photos_public.gne', {
+            format: 'json',
+            jsoncallback: 'JSON_CALLBACK'
+        }, {
+            'load': {
+                'method': 'JSONP'
+            }
         });
-      $rootScope.loading = 0;
-    }]);
+    });
+    dsong.controller('songDetail', ['$scope', '$http', '$routeParams',
+        function($scope, $http, $routeParams) {
+            var id = $routeParams.songId;
+            if ($routeParams.method == 'remove') {
+                $http.delete('/api/song/' + id);
+            } else {
+                $http.get('/api/song/' + id)
+                    .success(function(data) {
+                        $scope.song = data;
+                        $scope.img = assets.getImage();
+                        $scope.songAudioplayer = data.audioplayer.split('/').splice(-1)[0].replace(/\s+/g, '');
+                        $scope.dataExist = function(attr) {
+                            if (attr === null || attr === '') return false;
+                            return attr.length;
+                        };
+                    });
+            }
+        }
+    ]);
+
 }());
