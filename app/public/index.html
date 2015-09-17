@@ -1,24 +1,27 @@
 <html ng-app="dsong">
-  <head>
+
+<head>
     <link rel="stylesheet" href="/assets/css/screen.css">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.3/angular-route.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-resource.js"></script>
-    <script src="/core.js"></script>    
+    <script src="/core.js"></script>
     <script src="/ctrl/nav.ctrl.js"></script>
     <script src="/ctrl/artist.ctrl.js"></script>
     <script src="/ctrl/artists.ctrl.js"></script>
     <script src="/ctrl/home.ctrl.js"></script>
     <script src="/ctrl/songs.ctrl.js"></script>
     <base href="/" />
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="layer layer1">
-      <header ng-controller="navCtrl" ng-class="headerClass()" navigation>
-      </header>
-      <div ng-view>
-      </div>
+        <header ng-controller="navCtrl" ng-class="headerClass()" navigation>
+        </header>
+        <div ng-view>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>

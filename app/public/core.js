@@ -87,16 +87,19 @@
     dsong.controller('songDetail', ['$scope', '$http', '$routeParams',
         function($scope, $http, $routeParams) {
             var id = $routeParams.songId;
-            if ($routeParams.method == 'remove') {
+            if ($routeParams.method === 'remove') {
                 $http.delete('/api/song/' + id);
             } else {
                 $http.get('/api/song/' + id)
                     .success(function(data) {
                         $scope.song = data;
-                        $scope.img = assets.getImage();
-                        $scope.songAudioplayer = data.audioplayer.split('/').splice(-1)[0].replace(/\s+/g, '');
+                        // $scope.img = assets.getImage();
+                        $scope.songAudioplayer = data.audioplayer.split('/').splice(-1)[0].replace(
+                            /\s+/g, '');
                         $scope.dataExist = function(attr) {
-                            if (attr === null || attr === '') return false;
+                            if (attr === null || attr === '') {
+                                return false;
+                            }
                             return attr.length;
                         };
                     });
@@ -105,3 +108,4 @@
     ]);
 
 }());
+
