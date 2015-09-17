@@ -97,7 +97,8 @@ body
       padding-left: 8px
       color: white
       text-decoration: none
-    
+.databox.artist
+  
 
 header
   max-width: 960px
@@ -124,7 +125,7 @@ header
             border-bottom: 1px solid #444
             display: block
             visibility: visible
-            +transition(visibility 0s ease-in-out 0)          
+            //+transition(visibility 0s ease-in-out 0)          
 h1
   +transition(all .5s ease-in-out .2s)
   font-family: Helvetica, Arial
@@ -184,7 +185,7 @@ nav
         background-color: #333
         height: 50px
         width: 300px
-        display: block
+        display: none
         visibility: hidden
         +transition(visibility 0s ease-in-out .8s)
         &>li
