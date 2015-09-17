@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/app/public')); 
 console.log(__dirname + '/app/public');
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 4443; 
 
 var api = require('./api/routes/api.router.js');
 app.use('/api', api);
