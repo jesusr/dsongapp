@@ -1,7 +1,7 @@
 <div class="header-content" ng-controller="artistDetailCtrl">
   <div class="sublayer img"></div>
   <div ng-if="artist" id="container" class="databoxes">
-    <div class="databox">
+    <div class="databox artist">
       <div class="databox-header">
         <h2 class="title"><a href="/artist/{{artist.name}}">{{artist.name}}</a></h2>
       </div>
@@ -11,7 +11,7 @@
     </div>
   </div>
   <div id="container" class="databoxes">
-    <div class="databox" ng-repeat="item in songs">
+    <div class="databox song" ng-repeat="item in songs">
       <div class="databox-header">
         <h2 class="title"><a href="/song/{{item._id}}">{{item.title}}</a></h2>
       </div>
