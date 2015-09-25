@@ -3,26 +3,26 @@
     dsong.controller('homeCtrl', ['$scope', '$location', '$http', 'flickrPhotos',
         function($scope, $location, $http, flickrPhotos) {
             $http.get('/api/artists/random/4')
-                .success(function(data) {
+                .success(function(d) {
                     var e;
-                    $scope.artists = data;
+                    $scope.artists = d;
                     $scope.img = [];
 
-                    function callback(data) {
-                        if (!data.items.length) {
+                    function callback(res) {
+                        if (!res.items.length) {
                             $scope.img.push('/assets/res/img/dummy.png');
                         } else {
-                            $scope.img.push(data.items[0].media.m);
+                            $scope.img.push(res.items[0].media.m);
                         }
                     }
 
-                    for (e in data) {
+                    for (e in d) {
                         flickrPhotos.load({
-                            tags: data[e].name + ' , live',
+                            tags: d[e].name + ' , live',
                             tag_mode: 'all',
                             content_type: 1,
                             per_page: 1
-                        }, callback(data));
+                        }).then(callback(res));
                     }
                 });
             $http.get('/api/songs/random/10')

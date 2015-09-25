@@ -2,14 +2,12 @@
     'use strict';
     var dsong;
     dsong = angular.module('dsong', ['ng', 'ngRoute', 'ngResource']);
-    dsong.config(['$locationProvider', function($locationProvider) {
+    dsong.config(['$locationProvider', '$httpProvider', function($locationProvider, $httpProvider) {
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false
         });
         $locationProvider.html5Mode(true).hashPrefix('!');
-    }]);
-    dsong.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.defaults.withCredentials = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];

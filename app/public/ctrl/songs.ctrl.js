@@ -4,14 +4,14 @@ dsong.controller('songsList', ['$scope', '$http', '$routeParams', '$rootScope',
         $rootScope.loading = 1;
         var page, crit;
         if ($routeParams.page) {
-          page = $routeParams.page;
-        } else { 
-          page = 1;
+            page = $routeParams.page;
+        } else {
+            page = 1;
         }
         if ($routeParams.crit) {
-          crit = 'orderby/artist/1';
+            crit = 'orderby/artist/1';
         } else {
-          crit = '';
+            crit = '';
         }
         $http.get('/api/songs/15/' + page + '/' + crit)
             .success(function(data) {
@@ -23,7 +23,7 @@ dsong.controller('songsList', ['$scope', '$http', '$routeParams', '$rootScope',
                 $scope.pprev = (page < 2 ? -1 : '/songs/' + (parseInt(page) - 1) + crit);
                 $scope.dataExist = function(attr) {
                     if (attr === null || attr === '' || attr === 'undefined') {
-                      return false;
+                        return false;
                     }
                     return attr.length;
                 };
